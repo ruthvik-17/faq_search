@@ -1,0 +1,59 @@
+$$ What is BIG-IP Cloud Edition?
+^^ BIG-IP Cloud Edition is a solution composed of the BIG-IP Per-App Virtual Editions for app service auto-scaling plus BIG-IQ 6.0 per-app management and analytics capabilities.
+
+$$ What are the minimum versions needed for BIG-IP Cloud Edition?
+^^ The minimum versions required to support the full Cloud Edition solution is BIG-IP version 13.1.0.5 or later and BIG-IQ version 6.0.
+
+$$ What are the supported cloud evironments for BIG-IP Cloud Edition?
+^^ At release VMware and AWS environments will be supported. Support for Azure and other cloud providers is planned.
+
+$$ Can BIG-IP Cloud Edition be deployed into private or public cloud?
+^^ Yes, BIG-IP Cloud Edition can be deployed in the same clouds as BIG-IP VE, and managed as any BIG-IP normally would, but we are delivering lifecycle management functionality, e.g. spin-up/spin-down, autoscaling, and rolling upgrades using BIG-IQ for VMware vSphere and AWS cloud environments.
+
+$$ Can I upgrade existing BIG-IQ 5.x to 6.0?
+I^^ nitially no, upgrades to 6.0 for existing BIG-IQ customers will be supported in 6.0.1 released later this year, along with support for BIG-IP 12.1.x versions. The intial release of BIG-IQ 6.0 will be limited to new installations of BIG-IQ.
+
+
+$$ Is the BIG-IP AVR module required for BIG-IQ analytics? Are BIG-IQ Data Collection Devices (DCDs) required for analytics?
+^^ Yes, AVR will be required to be provisioned on the BIG-IP’s utilized in the Cloud Edition use cases. Many of the advanced analytics use cases require AVR to collect more detailed HTTP layer, and performance stats to trigger autoscale. When setting up the Device Templates the admin will need to enable AVR. The AVR overhead on BIG-IP is lighter as all the processing/aggregation is done on BIG-IQ instead of BIG-IP. Data Collection Devices (DCDs) are required to receive the advanced analytics from BIG-IP and are available with a free license.
+
+
+$$ What is an App Template?
+^^ BIG-IQ 6.0 Application Templates are a way of standardizing application and security services deployment and policies required by an application in a service catalog as defined by the BIG-IP admin or domain expert. BIG-IQ 6.0 will include pre-defined templates for the common web application configurations. An App owner given the appropriate role-based access can then select a template that matches their desired deployment, fill out the required fields and then automatically deploy the application service for his/her application in the UI or can use published and documented APIs.
+
+
+$$ What is a Device Template?
+^^ BIG-IQ Device Templates are used to on-board BIG-IP Virtual Editions by enabling device instantiation, licensing, provisioning, and networking and are used along with application templates to support autoscaling. This allows complete automation of the environment, with no human involvement required to scale out VE services.
+
+
+$$ Where can I give general feedback on the BIG-IP Cloud Edition?
+^^ Please provide feedback through the DevCentral Q&A discussion for BIG-IP Cloud Edition.
+
+$$ What is BIG-IP Per App VE?
+^^ BIG-IP Per-App VE is a virtual edition designed and priced for dedicated per-app services, with licensed features for 1 VIP, 3 Virtual Servers, and support of LTM and Advanced WAF, and 2 throughput options, 25Mbps and 200Mbps.
+
+$$ What is the ‘1 virtual server, 3 virtual servers' limit?
+^^ Per-App VE is designed to support one application therefore it was licensed to support a single virtual IP address. However, within the 1 virtual IP address, administrators can also use 3 virtual server parameter different port numbers for the virtual IP. Within the allowed 3 virtual servers, one wild card virtual server is allowed primarily to support outbound traffic from backend servers.
+
+$$ Is there a BIG-IP version requirement for Per-App VE?
+^^ Yes. Per App VE is available in BIG-IP version 13.1.0.2 but for full Cloud Edition functionality we require version 13.1.0.5 or later.
+
+
+$$ I hear there are smaller images for VE, are these only for the Per-App VE?
+^^ No, the smaller images are be available in the BIG-IP v13.1.0.2 and later releases and are not restricted to Per-App VE. F5 is reducing the disk size for all virtual editions.
+
+
+$$ Are there different images for the Per App VE and the standard BIG-IP VE?
+^^ No. The images are the same between the per-app VE and the standard VE. Software licensing determines Per App VE or standard BIG-IP VE functionality.
+
+
+$$ What is the relevance of single slot images and Per-App VE?
+^^ Slot = Boot Partition. Per-App VE increases the scale of deployments and cost savings on footprint becomes even more relevant. Per-App VE will be typically targeted for 'wipe/deploy' instead of in-place upgrades of BIG-IP. The 1 slot images provide further storage savings by removing the 2nd slot which has been used for version upgrades. 1 slot images are avilable for Per App VE and standard BIG-IP virtual editions.
+
+
+$$ With the new Single Slot VE images, how do we perform upgrades?
+^^ There is no capability to upgrade software to a new version or even a HF or point release as we now call them. Instead they need to be deployed in an environment that support wipe/deploy type workflows. Wipe/deploy basically means that a new instance with the new version of software is provisioned, and it will replace the older version VE either through automation, or some sort of auto-scale type workflow where traffic is directed from the older instance to the newer one.
+
+
+$$ Can I upgrade from Per-App VE to a standard VE by adding/changing the license?
+^^ Nope. You can license manage Per App VE along side standard virtual editions through BIG-IQ but they are not interchangeable.
